@@ -1,3 +1,5 @@
+package com.bignerdranch.nyethack
+
 import java.io.File
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -22,18 +24,18 @@ private val menuItemTypes = menuData.associate { (type, name, _) ->
 }
 
 fun visitTavern() {
-    narrate("$heroName enters $TAVERN_NAME")
+    narrate("${player.name} enters $TAVERN_NAME")
     narrate("There are several items for sale:")
     narrate(menuItems.joinToString())
 
     val patrons: MutableSet<String> = firstNames.shuffled().zip(lastNames.shuffled()) { firstName, lastname ->
         "$firstName $lastname"
     }.toMutableSet()
-    val patronGold = mutableMapOf(TAVERN_MASTER to 86.99, heroName to 4.50, *patrons.map {
+    val patronGold = mutableMapOf(TAVERN_MASTER to 86.99, player.name to 4.50, *patrons.map {
         it to 6.00
     }.toTypedArray())
 
-    narrate("$heroName sees several patrons in the tavern:")
+    narrate("${player.name} sees several patrons in the tavern:")
     narrate(patrons.joinToString())
 
     val itemDay = patrons.flatMap { getFavoriteMenuItem(it) }.random()
@@ -47,7 +49,7 @@ fun visitTavern() {
         patrons -= departingPatrons
         patronGold -= departingPatrons
     }.forEach { patron ->
-        narrate("$heroName sees $patron departing the tavern")
+        narrate("${player.name} sees $patron departing the tavern")
     }
     narrate("There are still some patrons in the Tavern")
     narrate(patrons.joinToString())
@@ -84,7 +86,7 @@ private fun placeOrder(patronName: String, menuItemName: String, patronGold: Mut
 }
 
 private fun displayPatronBalances(patronGold: Map<String, Double>) {
-    narrate("$heroName intuitively knows how much money each patron has")
+    narrate("${player.name} intuitively knows how much money each patron has")
     patronGold.forEach { patron, balance ->
         narrate("$patron has ${"%.2f".format(balance)} gold")
     }
