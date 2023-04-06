@@ -1,3 +1,5 @@
+package com.bignerdranch.nyethack
+
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -6,7 +8,7 @@ inline fun narrate(
     message: String,
     modifier: (String) -> String = { narrationModifier(it) }
 ) {
-//    println(narrationModifier(message))
+//    println(com.bignerdranch.nyethack.getNarrationModifier(message))
     println(modifier(message))
 }
 
