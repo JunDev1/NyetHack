@@ -7,10 +7,14 @@ fun main() {
     player = Player(playerName)
 //    com.bignerdranch.nyethack.changeNarratorMood()
     player.prophesize()
+
+    val currentRoom : Room = Tavern()
+
     val mortality = if (player.isImmortal) "an immortal" else "a mortal"
-    narrate("${player.name}, ${(player.title)}, heads to the town square")
+    narrate("${player.name} of ${(player.homeTown)}, ${player.title}, is in ${currentRoom.description()}")
     narrate("${player.name}, $mortality, has ${player.healthPoints} HP")
-    visitTavern()
+    currentRoom.enterRoom()
+
     player.castFireball()
     player.prophesize()
 }
