@@ -1,5 +1,7 @@
 package com.bignerdranch.nyethack
 
+import java.io.File
+
 class Player(
     initialName: String,
     val homeTown : String = "Neversummer",
@@ -53,5 +55,9 @@ class Player(
     fun prophesize() {
         narrate("$name thinks about their future")
         narrate("A fortune teller told Madrigal, \"$prophecy\"")
+    }
+    companion object {
+        private const val SAVE_FILE_NAME = "player.dat"
+        fun fromSaveFile() = Player(File(SAVE_FILE_NAME).readBytes().toString())
     }
 }
